@@ -1,4 +1,5 @@
 import requests
+import re
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -57,7 +58,8 @@ offset = 0
 while i < 3:
     xpathval = i + offset + 56
     folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
-    between.append(folder)
+    newfolder = re.findall('\d*\.?\d+', folder)
+    between.append(newfolder)
     i = i + 1
     offset = offset + 2
 
@@ -126,9 +128,14 @@ i = 0
 while i < 3:
     xpathval = i + 17
     folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
-
-
 sleep(100)
+
+
+
+
+
+
+
 
 
 
