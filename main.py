@@ -5,21 +5,22 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from time import sleep
 import warnings
-
 warnings.filterwarnings('ignore')
+
+i = 1
+offset = 0
+num = 0
 
 substring0 = "Thousandths"
 substring1 = "Hundredths"
 substring2 = "Tenths"
 
-i = 1
-placevaltype = 0
-offset = 0
-
 sup = []
 sub = []
 frac2dec = []
 fracresult = []
+placeval = []
+between = []
 
 options = Options()
 # options.add_argument("--window-size=1920,1080")
@@ -43,19 +44,38 @@ while i <= 20:
 
 i = 0
 
-while i <= 20:
-    folder = driver.find_element_by_xpath("(//td)[" + i + offset + 35 + "]").text
+while i <= 7:
+    xpathval = i + offset + 35
+    folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
+    placeval.append(folder)
+    i = i + 1
+    offset = offset + 2
 
-print(sup)
-print(sub)
+i = 0
+offset = 0
+
+while i < 3:
+    xpathval = i + offset + 56
+    folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
+    between.append(folder)
+    i = i + 1
+    offset = offset + 2
+
+i = 0
+offset = 0
 
 while i < 20:
     frac2dec.append(int(sup[i]) / int(sub[i]))
     i = i + 1
 
-print(frac2dec)
 i = 0
 offset = 0
+
+print(sup)
+print(sub)
+print(frac2dec)
+print(placeval)
+print(between)
 
 while i < 10:
    folder = driver.find_element_by_xpath("//input[@name='q" + str(i) + "']")
@@ -75,8 +95,38 @@ while i < 10:
 
 i = 0
 
-while i < 10:
-    if substring0 in
+while i < 7:
+    xpathval = i + 10
+    folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
+
+    if substring0 in placeval[i]:
+        substringtype = 0
+    elif substring1 in placeval[i]:
+        substringtype = 1
+    elif substring2 in placeval[i]:
+        substringtype = 2
+
+    if substringtype == 0:
+        lastchar = placeval[i][-1]
+        folder.click()
+        folder.send_keys(lastchar)
+    elif substringtype == 1:
+        lastchar = placeval[i][-2]
+        folder.click()
+        folder.send_keys(lastchar)
+    elif substringtype == 2:
+        lastchar = placeval[i][-3]
+        folder.click()
+        folder.send_keys(lastchar)
+
+    i = i + 1
+
+i = 0
+
+while i < 3:
+    xpathval = i + 17
+    folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
+
 
 sleep(100)
 
