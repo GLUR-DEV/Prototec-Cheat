@@ -1,5 +1,7 @@
 import requests
 import re
+import array as arr
+import string
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -21,7 +23,7 @@ sub = []
 frac2dec = []
 fracresult = []
 placeval = []
-between = []
+between = arr.array('f')
 
 options = Options()
 # options.add_argument("--window-size=1920,1080")
@@ -58,8 +60,20 @@ offset = 0
 while i < 3:
     xpathval = i + offset + 56
     folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
-    newfolder = re.findall('\d*\.?\d+', folder)
-    between.append(newfolder)
+    newfolder = re.findall('\d*\.?', folder)
+    finalfolder = ""
+    for char in newfolder:
+        if char != "[":
+            finalfolder += char
+    if finalfolder[-3] == ".":
+        finalfolder = finalfolder + ".0"
+    elif finalfolder[2] == ".":
+        finalfolder = finalfolder[0] + ".0" + finalfolder[1]+finalfolder[2]+finalfolder[3]
+
+    finalfolder1 = finalfolder[0]+finalfolder[1]+finalfolder[2]
+    finalfolder2 = finalfolder[3]+finalfolder[4]+finalfolder[5]
+    between.append(float(finalfolder1))
+    between.append(float(finalfolder2))
     i = i + 1
     offset = offset + 2
 
@@ -124,21 +138,16 @@ while i < 7:
     i = i + 1
 
 i = 0
+offset = 0
 
 while i < 3:
     xpathval = i + 17
     folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
+    result = float(between[i+offset]) + ((float(between[i+offset+1]) - float(between[i+offset])) / 2)
+    folder.click()
+    folder.send_keys(result)
+
+    i = i + 1
+    offset = offset + 1
+
 sleep(100)
-
-
-
-
-
-
-
-
-
-
-
-
-
