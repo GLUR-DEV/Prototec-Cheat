@@ -2,6 +2,7 @@ import requests
 import re
 import array as arr
 import string
+from fractions import Fraction
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -166,5 +167,15 @@ while i < 3:
 
     i = i + 1
     offset = offset + 1
+
+i = 0
+
+while i < 5:
+    xpathval = i + 20
+    folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
+    reducefrac = Fraction(int(percentages[i]), 100)
+    folder.click()
+    folder.send_keys(str(reducefrac))
+    i = i + 1
 
 sleep(100)
