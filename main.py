@@ -36,7 +36,14 @@ options.add_argument("--window-size=1920,1080")
 driver = webdriver.Chrome(options=options)
 driver.get("https://maths.prototec.co.nz/")
 
-print("Welcome to Prototec cheat. If there is any bugs please submit an issue in the github(github.com/GLUR-DEV/prototec)\n\n")
+folder = driver.find_element_by_xpath("//input[@name='studentName']")
+folder.click()
+folder.send_keys("Leighton has no dad")
+folder = driver.find_element_by_xpath("//input[@name='studentRoom']")
+folder.click()
+folder.send_keys("69")
+
+print("Welcome to Prototec cheat(Made by GLUR). If there is any bugs please submit an issue in the github(github.com/GLUR-DEV/prototec)\n")
 debug = input("Type 'debug' for debugging feedback. Or 'nodebug' for standard run\n")
 while True:
     if debug == "debug":
@@ -47,15 +54,18 @@ while True:
         break
     else:
         print("'" + debug + "' is not a valid option\n")
+        debug = input("Type 'debug' for debugging feedback. Or 'nodebug' for standard run\n")
 
 Qdelay = input("Please enter delay between questions(in ms), keep in mind sheet takes 5 seconds to complete with 0 delay\n")
 while True:
     if Qdelay.isdigit():
+        Qdelay = int(Qdelay) / 1000
         break
     else:
         print("'" + Qdelay + "' is not a valid number")
+        Qdelay = input("Please enter delay between questions(in ms), keep in mind sheet takes 5 seconds to complete with 0 delay\n")
 
-input("Press any button to start solving(sheet and over stuff will be set automatically)")
+input("Press any button to start solving(sheet and other stuff will be set automatically)")
 
 folder = driver.find_element_by_xpath("//button[@value='s8']")
 folder.click()
@@ -174,19 +184,20 @@ while i < 3:
 
 i = 0
 
-print(suparr)
-print(subarr)
-print(frac2decarr)
-print(placevalarr)
-print(betweenarr)
-print(percentagesarr)
-print(dec2perarr)
-print(rawHCFarr)
-print(HCFarr)
-print(rawLCMarr)
-print(LCMarr)
-print(squaredarr)
-print(squarearr)
+if isdebug == True:
+    print(suparr)
+    print(subarr)
+    print(frac2decarr)
+    print(placevalarr)
+    print(betweenarr)
+    print(percentagesarr)
+    print(dec2perarr)
+    print(rawHCFarr)
+    print(HCFarr)
+    print(rawLCMarr)
+    print(LCMarr)
+    print(squaredarr)
+    print(squarearr)
 
 while i < 20:
     frac2decarr.append(int(suparr[i]) / int(subarr[i]))
@@ -201,12 +212,15 @@ while i < 10:
     if frac2decarr[i + offset] > frac2decarr[i + offset + 1]:
         folder.click()
         folder.send_keys(">")
+        sleep(Qdelay)
     elif frac2decarr[i + offset] < frac2decarr[i + offset + 1]:
         folder.click()
         folder.send_keys("<")
+        sleep(Qdelay)
     elif frac2decarr[i + offset] == frac2decarr[i + offset + 1]:
         folder.click()
         folder.send_keys("=")
+        sleep(Qdelay)
 
     i = i + 1
     offset = offset + 1
@@ -228,14 +242,17 @@ while i < 7:
         lastchar = placevalarr[i][-1]
         folder.click()
         folder.send_keys(lastchar)
+        sleep(Qdelay)
     elif substringtype == 1:
         lastchar = placevalarr[i][-2]
         folder.click()
         folder.send_keys(lastchar)
+        sleep(Qdelay)
     elif substringtype == 2:
         lastchar = placevalarr[i][-3]
         folder.click()
         folder.send_keys(lastchar)
+        sleep(Qdelay)
 
     i = i + 1
 
@@ -248,6 +265,7 @@ while i < 3:
     result = (betweenarr[i + offset]) + (((betweenarr[i + offset + 1]) - (betweenarr[i + offset])) / 2)
     folder.click()
     folder.send_keys(round(result, 2))
+    sleep(Qdelay)
 
     i = i + 1
     offset = offset + 1
@@ -260,6 +278,7 @@ while i < 5:
     reducefrac = Fraction(int(percentagesarr[i]), 100)
     folder.click()
     folder.send_keys(str(reducefrac))
+    sleep(Qdelay)
     i = i + 1
 
 i = 0
@@ -270,6 +289,7 @@ while i < 5:
     dec2perresult = float(dec2perarr[i]) * 100
     folder.click()
     folder.send_keys(round(dec2perresult))
+    sleep(Qdelay)
     i = i + 1
 
 i = 0
@@ -278,19 +298,17 @@ offset = 0
 while i < 4:
     xpathval = i + 30
     folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
-    if substring3 in rawHCFarr[i]:
-        substringtype = 0
 
-    if substringtype == 0:
-        if HCFarr[i + offset] > HCFarr[i + offset + 1]:
+    if HCFarr[i + offset] > HCFarr[i + offset + 1]:
             smaller = HCFarr[i + offset + 1]
-        else:
+    else:
             smaller = HCFarr[i + offset]
-        for ii in range(1, smaller+1):
-            if((HCFarr[i + offset] % ii == 0) and (HCFarr[i + offset + 1] % ii == 0)):
-                hcf = ii
+    for ii in range(1, smaller+1):
+        if((HCFarr[i + offset] % ii == 0) and (HCFarr[i + offset + 1] % ii == 0)):
+             hcf = ii
     folder.click()
     folder.send_keys(hcf)
+    sleep(Qdelay)
 
     i = i + 1
     offset = offset + 1
@@ -303,21 +321,19 @@ lcm = 0
 while i < 3:
     xpathval = i + 34
     folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
-    if substring4 in rawLCMarr[i]:
-        substringtype = 1
 
-    if substringtype == 1:
-        if LCMarr[i + offset] > LCMarr[i + offset + 1]:
+    if LCMarr[i + offset] > LCMarr[i + offset + 1]:
             greater = LCMarr[i + offset]
-        else:
+    else:
             greater = LCMarr[i + offset + 1]
-        while (True):
-            if ((greater % LCMarr[i + offset] == 0) and (greater % LCMarr[i + offset + 1] == 0)):
-                lcm = greater
-                break
-            greater += 1
+    while (True):
+        if ((greater % LCMarr[i + offset] == 0) and (greater % LCMarr[i + offset + 1] == 0)):
+            lcm = greater
+            break
+        greater += 1
     folder.click()
     folder.send_keys(lcm)
+    sleep(Qdelay)
 
     i = i + 1
     offset = offset + 1
@@ -330,6 +346,7 @@ while i < 3:
     result = int(squaredarr[i])**int(squarearr[i])
     folder.click()
     folder.send_keys(result)
+    sleep(Qdelay)
     i = i + 1
 
-input("deez")
+input("Process complete! Press mark.")
