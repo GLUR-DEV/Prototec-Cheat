@@ -24,6 +24,7 @@ frac2dec = []
 fracresult = []
 placeval = []
 between = arr.array('f')
+percentages = []
 
 options = Options()
 # options.add_argument("--window-size=1920,1080")
@@ -80,6 +81,21 @@ while i < 3:
 i = 0
 offset = 0
 
+while i < 5:
+    xpathval = i + offset + 65
+    folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
+    newfolder = ""
+    for char in folder:
+        if char != "%":
+            newfolder += char
+
+    percentages.append(newfolder)
+    i = i + 1
+    offset = offset + 2
+
+i = 0
+offset = 0
+
 while i < 20:
     frac2dec.append(int(sup[i]) / int(sub[i]))
     i = i + 1
@@ -92,6 +108,7 @@ print(sub)
 print(frac2dec)
 print(placeval)
 print(between)
+print(percentages)
 
 while i < 10:
    folder = driver.find_element_by_xpath("//input[@name='q" + str(i) + "']")
@@ -143,9 +160,9 @@ offset = 0
 while i < 3:
     xpathval = i + 17
     folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
-    result = float(between[i+offset]) + ((float(between[i+offset+1]) - float(between[i+offset])) / 2)
+    result = (between[i+offset]) + (((between[i+offset+1]) - (between[i+offset])) / 2)
     folder.click()
-    folder.send_keys(result)
+    folder.send_keys(round(result, 2))
 
     i = i + 1
     offset = offset + 1
