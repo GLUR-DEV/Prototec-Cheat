@@ -27,6 +27,7 @@ placeval = []
 between = arr.array('f')
 percentages = []
 dec2per = []
+rawHCFLCM = []
 
 options = Options()
 # options.add_argument("--window-size=1920,1080")
@@ -103,6 +104,19 @@ while i < 5:
     folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
     dec2per.append(folder)
 
+    i = i + 1
+    offset = offset + 2
+
+i = 0
+offset = 0
+
+while i < 7:
+    xpathval = i + offset + 95
+    folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
+    rawHCFLCM.append(folder)
+    newfolder = re.findall('\d+', folder)
+    finalfolder = ""
+    print(newfolder)
     i = i + 1
     offset = offset + 2
 
