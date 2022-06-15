@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from time import sleep
 import warnings
+
 warnings.filterwarnings('ignore')
 
 i = 1
@@ -28,6 +29,7 @@ between = arr.array('f')
 percentages = []
 dec2per = []
 rawHCFLCM = []
+HCFLCM = []
 
 options = Options()
 # options.add_argument("--window-size=1920,1080")
@@ -72,10 +74,10 @@ while i < 3:
     if finalfolder[-3] == ".":
         finalfolder = finalfolder + ".0"
     elif finalfolder[2] == ".":
-        finalfolder = finalfolder[0] + ".0" + finalfolder[1]+finalfolder[2]+finalfolder[3]
+        finalfolder = finalfolder[0] + ".0" + finalfolder[1] + finalfolder[2] + finalfolder[3]
 
-    finalfolder1 = finalfolder[0]+finalfolder[1]+finalfolder[2]
-    finalfolder2 = finalfolder[3]+finalfolder[4]+finalfolder[5]
+    finalfolder1 = finalfolder[0] + finalfolder[1] + finalfolder[2]
+    finalfolder2 = finalfolder[3] + finalfolder[4] + finalfolder[5]
     between.append(float(finalfolder1))
     between.append(float(finalfolder2))
     i = i + 1
@@ -114,14 +116,9 @@ while i < 7:
     xpathval = i + offset + 95
     folder = driver.find_element_by_xpath("(//td)[" + str(xpathval) + "]").text
     rawHCFLCM.append(folder)
-    newfolder = re.findall('\d+', folder)
-    finalfolder = ""
-    for char in newfolder:
-        if char != "[":
-            finalfolder += char
-    
-
-    print(newfolder)
+    for word in folder.split():
+        if word.isdigit():
+            HCFLCM.append(int(word))
     i = i + 1
     offset = offset + 2
 
@@ -142,22 +139,24 @@ print(placeval)
 print(between)
 print(percentages)
 print(dec2per)
+print(rawHCFLCM)
+print(HCFLCM)
 
 while i < 10:
-   folder = driver.find_element_by_xpath("//input[@name='q" + str(i) + "']")
+    folder = driver.find_element_by_xpath("//input[@name='q" + str(i) + "']")
 
-   if frac2dec[i+offset] > frac2dec[i+offset+1]:
-       folder.click()
-       folder.send_keys(">")
-   elif frac2dec[i+offset] < frac2dec[i+offset+1]:
-       folder.click()
-       folder.send_keys("<")
-   elif frac2dec[i+offset] == frac2dec[i+offset+1]:
-       folder.click()
-       folder.send_keys("=")
+    if frac2dec[i + offset] > frac2dec[i + offset + 1]:
+        folder.click()
+        folder.send_keys(">")
+    elif frac2dec[i + offset] < frac2dec[i + offset + 1]:
+        folder.click()
+        folder.send_keys("<")
+    elif frac2dec[i + offset] == frac2dec[i + offset + 1]:
+        folder.click()
+        folder.send_keys("=")
 
-   i = i + 1
-   offset = offset + 1
+    i = i + 1
+    offset = offset + 1
 
 i = 0
 
@@ -193,7 +192,7 @@ offset = 0
 while i < 3:
     xpathval = i + 17
     folder = driver.find_element_by_xpath("//input[@name='q" + str(xpathval) + "']")
-    result = (between[i+offset]) + (((between[i+offset+1]) - (between[i+offset])) / 2)
+    result = (between[i + offset]) + (((between[i + offset + 1]) - (between[i + offset])) / 2)
     folder.click()
     folder.send_keys(round(result, 2))
 
