@@ -116,6 +116,11 @@ while i < 7:
     rawHCFLCM.append(folder)
     newfolder = re.findall('\d+', folder)
     finalfolder = ""
+    for char in newfolder:
+        if char != "[":
+            finalfolder += char
+    
+
     print(newfolder)
     i = i + 1
     offset = offset + 2
