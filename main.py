@@ -43,7 +43,7 @@ folder = driver.find_element_by_xpath("//input[@name='studentRoom']")
 folder.click()
 folder.send_keys("69")
 
-print("Welcome to Prototec cheat(Made by GLUR). If there is any bugs please submit an issue in the github(github.com/GLUR-DEV/prototec)\n")
+print("Welcome to Prototec cheat(Made by GLUR). If there is any bugs please submit an issue in the github(github.com/GLUR-DEV/Prototec-Cheat)\n")
 debug = input("Type 'debug' for debugging feedback. Or 'nodebug' for standard run\n")
 while True:
     if debug == "debug":
