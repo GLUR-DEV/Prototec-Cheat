@@ -6,8 +6,8 @@ GLUR
 * `Realtime text reading`
 * `Realtime equation solving`
 * `Console UI`
-* `Optimized Reading and Writing
-* `Optimized solving
+* `Optimized Reading and Writing`
+* `Optimized solving`
 
 ### TODO
 * Fix a squaring array bug(high)
