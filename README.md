@@ -16,10 +16,10 @@ GLUR
 * Create a requirements.txt for easier compiling(minor)
 
 ### Compiling the Program
-First you will need [python3+](https://www.python.org/downloads/). Then you need to install packages(see code imports)
+First you will need [python3+](https://www.python.org/downloads/). And [chromedriver](https://chromedriver.chromium.org/downloads) for whatever version of chrome you have installed. Then you need to install packages(see code imports)
 
 Then navigate to directory(using `cd`) and type:
 ```
 pyinstaller -F main.py
 ```
-Your compiled exe will be in the **dist** folder. Just follow instructions in the console when exe has been opened.
+Your compiled exe will be in the **dist** folder. Make sure to put the [chromedriver](https://chromedriver.chromium.org/downloads) application in the dist folder as well. Just follow instructions in the console when exe has been opened.
