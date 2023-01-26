@@ -1,5 +1,6 @@
 # Prototec Cheat
-##!WARNING! SELENIUM DEPRACATED FIND_ELEMENT_BY_XPATH THIS CODE WILL NO LONGER WORK. I CANT BE BOTHERED TO FIX IT
+## !WARNING! SELENIUM DEPRACATED FIND_ELEMENT_BY_XPATH THIS CODE WILL NO LONGER WORK. I CANT BE BOTHERED TO FIX IT
+
 If you don't want to compile this cheat you can download it from my [patreon](https://www.patreon.com/GLUR). You can find all my compiled code projects on there.
 
 A simple python program that uses selenium to read and solve prototec questions, all in realtime.
